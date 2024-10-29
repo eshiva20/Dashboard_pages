@@ -18,13 +18,67 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <main class="kanban_view_main">
     <h2 class="heading">Tasks List</h2>
-    <ul class="all_lists">
-      <li>All</li>
-      <!-- add class green to show it as selected -->
-      <li class="green">Ad Hoc</li>
-      <li>MOM</li>
-      <li>Project</li>
-    </ul>
+    <div class="filters">
+      <ul class="all_lists">
+        <li>All</li>
+        <!-- add class green to show it as selected -->
+        <li class="green">Ad Hoc</li>
+        <li>MOM</li>
+        <li>Project</li>
+      </ul>
+      <!-- priority buttons-->
+      <div class="priority_tabs">
+        <input
+          type="radio"
+          class="btn-check"
+          name="priority"
+          id="priority-all"
+          autocomplete="off"
+        />
+        <label class="btn btn-danger priority-btn" for="priority-all">
+          <i class="fa-solid fa-flag flag_icon"></i>All
+        </label>
+        <input
+          type="radio"
+          class="btn-check"
+          name="priority"
+          id="priority-high"
+          autocomplete="off"
+          checked
+        />
+        <label class="btn btn-danger priority-btn" for="priority-high">
+          <i class="fa-solid fa-flag flag_icon"></i>High
+        </label>
+
+        <input
+          type="radio"
+          class="btn-check"
+          name="priority"
+          id="priority-medium"
+          autocomplete="off"
+        />
+        <label
+          class="btn btn-outline-secondary priority-btn"
+          for="priority-medium"
+        >
+          <i class="fa-solid fa-flag flag_icon"></i>Medium
+        </label>
+
+        <input
+          type="radio"
+          class="btn-check"
+          name="priority"
+          id="priority-low"
+          autocomplete="off"
+        />
+        <label
+          class="btn btn-outline-secondary priority-btn"
+          for="priority-low"
+        >
+          <i class="fa-solid fa-flag flag_icon"></i>Low
+        </label>
+      </div>
+    </div>
 
     <section class="kanban_view_section">
       <div class="category">
@@ -583,11 +637,60 @@
       left: 50%;
       border-radius: 5px;
     }
+    .filters {
+      display: flex;
+      justify-content: space-between;
+    }
     .green {
       color: #009b1c !important;
     }
     .green::after {
       background-color: #009b1c !important;
+    }
+    .priority_tabs {
+      border: 1px solid #5b6971;
+      border-radius: 7px;
+      display: flex;
+      margin-left: auto;
+      height: 30px;
+    }
+    .priority-btn {
+      transition: background-color 0.1s ease;
+      border: none;
+      outline: none;
+      border-radius: 0px;
+      font-size: 14px;
+      padding: 5px 12px;
+    }
+    #priority-all:checked + .priority-btn {
+      border-radius: 6px 0px 0px 6px;
+      background-color: #02ae3b;
+    }
+    #priority-high + .priority-btn {
+      border-left: 1px solid #5b6971;
+    }
+    #priority-high:checked + .priority-btn {
+      background-color: #ee0000;
+      color: white;
+    }
+    #priority-medium + .priority-btn {
+      border-right: 1px solid #5b6971;
+      border-left: 1px solid #5b6971;
+    }
+    #priority-medium:checked + .priority-btn {
+      background-color: #005bff;
+      color: white;
+      border-right: 1px solid #5b6971;
+      border-left: 1px solid #5b6971;
+    }
+    #priority-low:checked + .priority-btn {
+      background-color: #f5a200;
+      color: white;
+      border-radius: 0px 6px 6px 0px;
+    }
+    input[type="radio"]:not(:checked) + .priority-btn {
+      background-color: transparent;
+      color: #6c757d;
     }
     .heading {
       font-size: 20px;
@@ -616,7 +719,7 @@
     }
     .category {
       min-width: calc(320px - 10px);
-      height: calc(100vh - 90px);
+      height: calc(100vh - 82px);
       padding: 5px;
     }
     .category_btn {
@@ -815,12 +918,12 @@
       border-radius: 50px;
       cursor: pointer;
     }
-    .kanban_view::-webkit-scrollbar {
+    .kanban_view_section::-webkit-scrollbar {
       height: 8px;
       background-color: #d9d9d9;
       border-radius: 50px;
     }
-    .kanban_view::-webkit-scrollbar-thumb {
+    .kanban_view_section::-webkit-scrollbar-thumb {
       background-color: #8a8a8a;
       border-radius: 50px;
       cursor: pointer;
